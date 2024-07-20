@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const connectDb = async () => {
   try {
     mongoose.connect(
-      "mongodb+srv://kumarhritik158:v4sqTZxqUm81UNut@cluster0.misgalp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+      "mongodb+srv://kumarhritik158:6MvICOqyNKX5HJt2@cluster0.ck0vxyj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
     );
     console.log("Databsae connected");
   } catch (error) {
