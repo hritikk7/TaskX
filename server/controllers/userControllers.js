@@ -25,6 +25,7 @@ exports.registerUser = async (req, res) => {
       email: lowerCaseEmail,
       password: hashedPass,
     });
+
     await newUser.save();
 
     ///remove password from response
