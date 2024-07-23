@@ -39,7 +39,7 @@ exports.createTask = async (req, res) => {
 exports.updateTask = async (req, res) => {
   const { title, description, status } = req.body;
   try {
-    const task = await Task.findById(req.params.id);
+    let task = await Task.findById(req.params.id);
     if (!task) {
       return res.status(404).json({
         message: "Task Not Found",
@@ -51,8 +51,8 @@ exports.updateTask = async (req, res) => {
         message: "User not authorized",
       });
     }
-    task = await Task.findAndUpdate(
-      req.params.id,
+    task = await Task.updateOne(
+      {_id : req.params.id},
       {
         $set: {
           title,
@@ -82,13 +82,13 @@ exports.deleteTask = async (req, res) =>{
       });
     }
 
-    if (task.createdBy.toString() != req.params.id) {
+    if (task.createdBy.toString() != req.user.id) {
       return res.status(404).json({
         message: "User not authorized",
       });
     }
 
-    await Task.deleteOne(req.params.id)
+    await Task.deleteOne({_id : req.params.id})
 
     return res.status(200).json({
       message : "Task Deleted succesfully",
